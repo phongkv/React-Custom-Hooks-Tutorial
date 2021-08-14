@@ -143,3 +143,25 @@ A collection of easy-to-use React custom hooks.
     );
   };
   ```
+
+- **useDebounce**:
+  [src](https://github.com/wiliamfeng/react-custom-hooks/tree/main/src/useDebounce.js)
+  /
+  [doc](https://github.com/wiliamfeng/react-custom-hooks/tree/main/docs/useDebounce.md)
+
+  ```jsx
+  import { useDebounce } from "./useDebounce";
+
+  const App = () => {
+    const handleFetchApi = (key) => {
+      console.log(`fetching api with key ===> ${key}`);
+    };
+    const debouncedFetchApi = useDebounce(handleFetchApi, 2000);
+
+    const handleInputChange = (e) => {
+      debouncedFetchApi(e.target.value);
+    };
+
+    return <input onChange={handleInputChange} />;
+  };
+  ```
