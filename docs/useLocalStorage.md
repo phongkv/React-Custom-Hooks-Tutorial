@@ -1,27 +1,22 @@
 # useLocalStorage
 
-Sync React state to localStorage.
+Sync state to local storage so that it persists through a page refresh. Usage is similar to useState except we pass in a local storage key so that we can default to that value on page load instead of the specified initial value.
 
 ## Usage
 
 ```jsx
-import useLocalStorage from './useLocalStorage';
-
-const defaultSettings = {...};
+import useLocalStorage from "./useLocalStorage";
 
 const App = () => {
-  const [appSettings, setAppSettings] = useLocalStorage(
-    'app-settings',
-    defaultSettings
-  );
-
+  const [name, setName] = useLocalStorage("name", "Bob");
   return (
     <div>
-      <p>Your application's settings:</p>
-      <pre>
-        <code>{appSettings}</code>
-      </pre>
-      <button onClick={() => setAppSettings(defaultSettings)}>Reset settings</button>
+      <input
+        type="text"
+        placeholder="Enter your name"
+        value={name}
+        onChange={(e) => setName(e.target.value)}
+      />
     </div>
   );
 };

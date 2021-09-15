@@ -75,23 +75,18 @@ A collection of easy-to-use React custom hooks.
   [doc](https://github.com/wiliamfeng/react-custom-hooks/tree/main/docs/useLocalStorage.md)
 
   ```jsx
-  import useLocalStorage from './useLocalStorage';
-
-  const defaultSettings = {...};
+  import useLocalStorage from "./useLocalStorage";
 
   const App = () => {
-    const [appSettings, setAppSettings] = useLocalStorage(
-      'app-settings',
-      defaultSettings
-    );
-
+    const [name, setName] = useLocalStorage("name", "Bob");
     return (
       <div>
-        <p>Your application's settings:</p>
-        <pre>
-          <code>{JSON.stringify(appSettings)}</code>
-        </pre>
-        <button onClick={() => setAppSettings(defaultSettings)}>Reset settings</button>
+        <input
+          type="text"
+          placeholder="Enter your name"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+        />
       </div>
     );
   };
@@ -163,5 +158,54 @@ A collection of easy-to-use React custom hooks.
     };
 
     return <input onChange={handleInputChange} />;
+  };
+  ```
+
+- **usePrevious**:
+  [src](https://github.com/wiliamfeng/react-custom-hooks/tree/main/src/usePrevious.js)
+  /
+  [doc](https://github.com/wiliamfeng/react-custom-hooks/tree/main/docs/usePrevious.md)
+
+  ```jsx
+  import { usePrevious } from "./usePrevious";
+
+  const App = () => {
+    const [count, setCount] = useState(0);
+    const prevCount = usePrevious(count);
+
+    return (
+      <div>
+        <h1>
+          Now: {count}, before: {prevCount}
+        </h1>
+        <button onClick={() => setCount(count + 1)}>Increment</button>
+      </div>
+    );
+  };
+  ```
+
+- **useStorage**:
+  [src](https://github.com/wiliamfeng/react-custom-hooks/tree/main/src/useStorage.js)
+  /
+  [doc](https://github.com/wiliamfeng/react-custom-hooks/tree/main/docs/useStorage.md)
+
+  ```jsx
+  import { useStorage } from "./useStorage";
+
+  const App = () => {
+    const [name, setName, removeName] = useSessionStorage("name", "Tom");
+    const [age, setAge, removeAge] = useLocalStorage("age", 20);
+
+    return (
+      <div>
+        <div>
+          {name} - {age}
+        </div>
+        <button onClick={() => setName("John")}>Set Name</button>
+        <button onClick={() => setAge(40)}>Set Age</button>
+        <button onClick={removeName}>Remove Name</button>
+        <button onClick={removeAge}>Remove Age</button>
+      </div>
+    );
   };
   ```
