@@ -1,5 +1,7 @@
+import { useEffect, useRef } from "react";
+
 const useEventListener = (
-  eventType = '',
+  eventType = "",
   listener = () => null,
   target = window,
   options = null
@@ -13,7 +15,7 @@ const useEventListener = (
   useEffect(() => {
     if (!target?.addEventListener) return;
 
-    const eventListener = event => savedListener.current(event);
+    const eventListener = (event) => savedListener.current(event);
 
     target.addEventListener(eventType, eventListener, options);
 
